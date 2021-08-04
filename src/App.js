@@ -1,26 +1,33 @@
-import { useState } from 'react';
+import { useReducer } from 'react';
 
 import PostList from './post/PostList';
 import CreatePost from './post/CreatePost';
 import UserBar from './user/UserBar';
+
+import appReducer from './reducers';
 
 const defaultPosts = [
   { title: 'React Hooks', content: 'The greatest thing since sliced bread!', author: 'Tyrone Biggums' },
   { title: 'Using React Fragments', content: 'Keeping the DOM tree clean!', author: 'Tyrone Biggums' }
 ]
 
+
+
 export default function App () {
-  const [ user, setUser ] = useState('')
-  const [ posts, setPosts ] = useState(defaultPosts)
+  const [ state, dispatch ] = useReducer(appReducer, { user:'', posts:defaultPosts })
+  const { user, posts } = state
   
   return (
     <div style={{ padding: 8 }}>
-      <UserBar user={user} setUser={setUser}/>
+      <UserBar 
+        user={user} 
+        dispatch={dispatch}
+      />
       <br />
       {user && <CreatePost 
         user={user} 
         posts={posts} 
-        setPosts={setPosts} 
+        dispatch={dispatch} 
       />}
       <br />
       <hr />
