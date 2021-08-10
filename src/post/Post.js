@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { ThemeContext } from "../context";
+import { ThemeContext } from "../contexts";
 
 export default function Post ({ title, content, author }) {
     const { secondaryColor } = useContext(ThemeContext)

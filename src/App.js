@@ -1,6 +1,6 @@
 import { useReducer, useEffect, useState } from 'react';
 
-import { ThemeContext } from './context';
+import { ThemeContext, StateContext } from './contexts';
 
 import PostList from './post/PostList';
 import CreatePost from './post/CreatePost';
@@ -34,25 +34,20 @@ export default function App () {
   });
 
   return (
-    <ThemeContext.Provider value={theme}>
-      <div style={{ padding: 8 }}>
-        <Header text="React Hooks Blog" />
-        <ChangeTheme theme={theme} setTheme={setTheme} />
-        <br />
-        <UserBar 
-          user={user} 
-          dispatch={dispatch}
-        />
-        <br />
-        {user && <CreatePost 
-          user={user} 
-          posts={posts} 
-          dispatch={dispatch} 
-        />}
-        <br />
-        <hr />
-        <PostList posts={posts} />
-      </div>
-    </ThemeContext.Provider >
+    <StateContext.Provider value={{ state, dispatch }} >
+      <ThemeContext.Provider value={theme}>
+        <div style={{ padding: 8 }}>
+          <Header text="React Hooks Blog" />
+          <ChangeTheme theme={theme} setTheme={setTheme} />
+          <br />
+          <UserBar />
+          <br />
+          {user && <CreatePost />}
+          <br />
+          <hr />
+          <PostList />
+        </div>
+      </ThemeContext.Provider >
+    </StateContext.Provider>
   )
 }
