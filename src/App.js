@@ -1,4 +1,5 @@
 import { useReducer, useEffect, useState } from 'react';
+import { useResource } from 'react-request-hook';
 
 import { ThemeContext, StateContext } from './contexts';
 
@@ -10,11 +11,6 @@ import ChangeTheme from './ChangeTheme';
 
 import appReducer from './reducers';
 
-const defaultPosts = [
-  { title: 'React Hooks', content: 'The greatest thing since sliced bread!', author: 'Tyrone Biggums' },
-  { title: 'Using React Fragments', content: 'Keeping the DOM tree clean!', author: 'Tyrone Biggums' }
-]
-
 
 
 export default function App () {
@@ -22,9 +18,25 @@ export default function App () {
     primaryColor: 'deepskyblue',
     secondaryColor: 'coral'
   })
-  const [ state, dispatch ] = useReducer(appReducer, { user:'', posts:defaultPosts })
-  const { user, posts } = state
-  
+  const [ state, dispatch ] = useReducer(appReducer, { user: '', posts: [], error: '' })
+    const { user, error } = state
+    
+    const [ posts, getPosts ] = useResource(() => ({
+        url: '/posts',
+        method: 'get'
+    }))
+    useEffect(getPosts, [])
+    useEffect(() => {
+        if (posts && posts.error) {
+            dispatch({ type: 'POSTS_ERROR' })
+        }
+        if (posts && posts.data) {
+            dispatch({ type: 'FETCH_POSTS', posts: posts.data.reverse() })
+        }
+    }, [posts])
+
+
+
   useEffect (() => {
     if (user) {
       document.title = `${user} - React Hooks Blog`
@@ -45,9 +57,11 @@ export default function App () {
           {user && <CreatePost />}
           <br />
           <hr />
+          {error && <b>{error}</b>}
           <PostList />
         </div>
       </ThemeContext.Provider >
     </StateContext.Provider>
   )
 }
+

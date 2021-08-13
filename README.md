@@ -1,3 +1,22 @@
+### How to setup JSON server tool ### 
+
+# If not installed:
+1. First, we are going to install the json-server tool via npm:
+> npm install --save json-server
+
+# Once installed:
+2. Now, we can start our backend server, by calling the following command:
+> npx json-server --watch server/db.json
+
+
+
+
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -68,3 +87,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `yarn build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
