@@ -1,14 +1,45 @@
 {
-    "posts": [
-        { "id": "react-hooks", "title": "React Hooks", "content":"The greatest thing since sliced bread!", "author": "Tyrone Biggums"},
-        { "id": "react-fragments", "title": "Using React Fragments", "content": "Keeping the DOM tree clean!", "author":"Tyrone Biggums" }
-    ],
-    "users": [
-        { "id": 1, "username": "Tyrone Biggums", "password":"supersecure42" }
-    ],
-    "themes": [
-        { "id": 1, "primaryColor": "deepskyblue", "secondaryColor":"coral" },
-        { "id": 2, "primaryColor": "orchid", "secondaryColor":"mediumseagreen" },
-        { "id": 3, "primaryColor": "darkslategray","secondaryColor": "slategray" }
-    ]
+  "posts": [
+    {
+      "id": "react-hooks",
+      "title": "React Hooks",
+      "content": "The greatest thing since sliced bread!",
+      "author": "Tyrone Biggums"
+    },
+    {
+      "id": "react-fragments",
+      "title": "Using React Fragments",
+      "content": "Keeping the DOM tree clean!",
+      "author": "Tyrone Biggums"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "username": "Tyrone Biggums",
+      "password": "supersecure42"
+    },
+    {
+      "username": "TiltedLady",
+      "password": "american",
+      "id": 2
+    }
+  ],
+  "themes": [
+    {
+      "id": 1,
+      "primaryColor": "deepskyblue",
+      "secondaryColor": "coral"
+    },
+    {
+      "id": 2,
+      "primaryColor": "orchid",
+      "secondaryColor": "mediumseagreen"
+    },
+    {
+      "id": 3,
+      "primaryColor": "darkslategray",
+      "secondaryColor": "slategray"
+    }
+  ]
 }
