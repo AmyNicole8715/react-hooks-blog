@@ -10,6 +10,7 @@ import PostList from './post/PostList';
 import HeaderBar from './pages/HeaderBar';
 import HomePage from './pages/HomePage';
 import PostPage from './pages/PostPage';
+import FooterBar from './pages/FooterBar';
 
 import appReducer from './reducers';
 
@@ -48,6 +49,7 @@ export default function App () {
             <HeaderBar setTheme={setTheme} />
             <hr />
             <View />
+            <FooterBar />
           </div>
         </Router>
       </ThemeContext.Provider >
