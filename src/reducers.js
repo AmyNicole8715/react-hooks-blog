@@ -20,7 +20,7 @@ function userReducer (state, action) {
         return action.posts
 
       case 'CREATE_POST':
-        const newPost = { title: action.title, content: action.content, author: action.author }
+        const newPost = { title: action.title, content: action.content, author: action.author, id: action.id }
         return [ newPost, ...state ]
 
         default:

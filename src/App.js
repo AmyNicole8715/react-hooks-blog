@@ -1,39 +1,34 @@
-import { useReducer, useEffect, useState } from 'react';
+import React, { useReducer, useEffect, useState } from 'react';
 import { useResource } from 'react-request-hook';
+
+import { Router, View } from 'react-navi';
+import { mount, route } from 'navi';
 
 import { ThemeContext, StateContext } from './contexts';
 
 import PostList from './post/PostList';
-import CreatePost from './post/CreatePost';
-import UserBar from './user/UserBar';
-import Header from './Header';
-import ChangeTheme from './ChangeTheme';
+import HeaderBar from './pages/HeaderBar';
+import HomePage from './pages/HomePage';
+import PostPage from './pages/PostPage';
 
 import appReducer from './reducers';
 
-
+const routes = mount ({
+  '/': route({ view: <HomePage /> }),
+  '/view/:id': route(req => {
+    return { view: <PostPage id={req.params.id} /> }
+  }),
+});
 
 export default function App () {
   const [ theme, setTheme ] = useState({ 
     primaryColor: 'deepskyblue',
     secondaryColor: 'coral'
-  })
+  });
   const [ state, dispatch ] = useReducer(appReducer, { user: '', posts: [], error: '' })
     const { user, error } = state
     
-    const [ posts, getPosts ] = useResource(() => ({
-        url: '/posts',
-        method: 'get'
-    }))
-    useEffect(getPosts, [])
-    useEffect(() => {
-        if (posts && posts.error) {
-            dispatch({ type: 'POSTS_ERROR' })
-        }
-        if (posts && posts.data) {
-            dispatch({ type: 'FETCH_POSTS', posts: posts.data.reverse() })
-        }
-    }, [posts])
+    
 
 
 
@@ -48,20 +43,15 @@ export default function App () {
   return (
     <StateContext.Provider value={{ state, dispatch }} >
       <ThemeContext.Provider value={theme}>
-        <div style={{ padding: 8 }}>
-          <Header text="React Hooks Blog" />
-          <ChangeTheme theme={theme} setTheme={setTheme} />
-          <br />
-          <UserBar />
-          <br />
-          {user && <CreatePost />}
-          <br />
-          <hr />
-          {error && <b>{error}</b>}
-          <PostList />
-        </div>
+        <Router routes={routes}>
+          <div style={{ padding: 8 }}>
+            <HeaderBar setTheme={setTheme} />
+            <hr />
+            <View />
+          </div>
+        </Router>
       </ThemeContext.Provider >
     </StateContext.Provider>
   )
-}
+};
 

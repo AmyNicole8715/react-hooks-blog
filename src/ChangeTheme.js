@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useResource } from 'react-request-hook';
 
 function ThemeItem ({ theme, active, onClick }) {
