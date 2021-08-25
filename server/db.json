@@ -17,6 +17,12 @@
       "content": "Testing mcTestface Tested this Test",
       "author": "TiltedLady",
       "id": "eQZabAo"
+    },
+    {
+      "title": "Test Post2",
+      "content": "Tested tested hsdblaskjdhaslkjdh.askljdhkjlasdhalskjdjhasd",
+      "author": "Newbie",
+      "id": "thHiFPA"
     }
   ],
   "users": [
@@ -29,6 +35,11 @@
       "username": "TiltedLady",
       "password": "supersecure42",
       "id": 2
+    },
+    {
+      "username": "Newbie",
+      "password": "newbienoob",
+      "id": 3
     }
   ],
   "themes": [

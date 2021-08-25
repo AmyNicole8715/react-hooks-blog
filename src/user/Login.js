@@ -1,14 +1,17 @@
 import { useState, useContext, useEffect } from 'react';
 import { useResource } from 'react-request-hook';
 
+import { useInput } from 'react-hookedup';
+
 import { StateContext } from '../contexts';
 
 export default function Login () {
     const { dispatch } = useContext(StateContext)
-    const [ username, setUsername ] = useState('')
     const [ loginFailed, setLoginFailed ] = useState(false)
-    const [ password, setPassword ] = useState('')
-    
+
+    const { value: username, bindToInput: bindUsername } = useInput('')
+    const { value: password, bindToInput: bindPassword } = useInput('')
+
     const [ user, login ] = useResource((username, password) => ({      // in real world we would send password via POST data via HTTPS
         url: `/login/${encodeURI(username)}/${encodeURI(password)}`,
         method: 'get'        
@@ -28,13 +31,6 @@ export default function Login () {
         }
     }, [user])  // We make sure that the Effect Hook triggers whenever the user object from the Resource Hook updates
 
-    function handlePassword (evt) {
-        setPassword(evt.target.value)
-    }
-
-    function handleUsername (evt) {
-        setUsername(evt.target.value)
-    }
 
     return (
         <form onSubmit={e => { e.preventDefault(); login(username, password) }}>
@@ -42,7 +38,7 @@ export default function Login () {
             <input 
                 type="text"
                 value={username}
-                onChange={handleUsername}
+                {...bindUsername}
                 name="login-username"
                 id="login-username"
             />
@@ -50,7 +46,7 @@ export default function Login () {
             <input 
                 type="password"
                 value={password}
-                onChange={handlePassword}
+                {...bindPassword}
                 name="login-password"
                 id="login-password"
             />

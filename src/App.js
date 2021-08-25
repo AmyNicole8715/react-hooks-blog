@@ -1,6 +1,4 @@
 import React, { useReducer, useEffect, useState } from 'react';
-import { useResource } from 'react-request-hook';
-
 import { Router, View } from 'react-navi';
 import { mount, route } from 'navi';
 
